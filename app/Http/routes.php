@@ -12,10 +12,14 @@
 */
 
 Route::get('/', function () {
+
     return view('welcome');
 });
-
 
 # Default make:auth
 Route::auth();
 Route::get('/home', 'HomeController@index');
+
+
+Route::resource('admin/users', 'AdminUsersController');
+
