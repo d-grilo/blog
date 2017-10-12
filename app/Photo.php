@@ -10,6 +10,17 @@ class Photo extends Model
         'file'
     ];
 
+    protected $uploads = '/images/';
+
+
+
+
+    # Accessor
+    public function getFileAttribute($photo) {
+        return $this->uploads . $photo;
+    }
+
+
 
 
 
