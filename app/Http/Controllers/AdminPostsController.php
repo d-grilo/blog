@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Category;
 use App\Http\Requests\PostsCreateRequest;
 use App\Photo;
 use App\Post;
@@ -32,8 +33,9 @@ class AdminPostsController extends Controller
     public function create()
     {
 
+        $categories = Category::lists('name', 'id')->all();
 
-        return view('admin.posts.create');
+        return view('admin.posts.create', compact('categories'));
     }
 
     /**
@@ -44,6 +46,8 @@ class AdminPostsController extends Controller
      */
     public function store(PostsCreateRequest $request)
     {
+
+
         # Receives the whole request
         $input = $request->all();
 
@@ -71,7 +75,7 @@ class AdminPostsController extends Controller
         # Redirects to posts.index
         return redirect('/admin/posts');
 
-        //return $request->all();
+
     }
 
     /**
