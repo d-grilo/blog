@@ -50,8 +50,17 @@
                     <li><a href="{{ url('/home') }}">Home</a></li>
                 </ul>
 
+
+
                 <!-- Right Side Of Navbar -->
                 <ul class="nav navbar-nav navbar-right">
+                    @if(Auth::check())
+                        @if(Auth::user()->isAdmin())
+                            <ul class="nav navbar-nav">
+                                <li><a href="/admin"><i class="fa fa-cog" aria-hidden="true"></i> Administration</a></li>
+                            </ul>
+                        @endif
+                    @endif
                     <!-- Authentication Links -->
                     @if (Auth::guest())
                         <li><a href="{{ url('/login') }}">Login</a></li>

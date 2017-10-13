@@ -3,6 +3,14 @@
 
 @section('content')
 
+    @if(Session::has('deleted_user'))
+        <p class="text-center bg-danger">{{session('deleted_user')}}</p>
+        @elseif(Session::has('updated_user'))
+        <p class="text-center bg-success">{{session('updated_user')}} <i class="fa fa-check" aria-hidden="true"></i></p>
+        @elseif(Session::has('created_user'))
+        <p class="text-center bg-info">{{session('created_user')}} <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></p>
+    @endif
+
     <h1>Users</h1>
 
     <table class="table">

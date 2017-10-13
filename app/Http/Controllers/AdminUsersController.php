@@ -10,9 +10,11 @@ use App\Role;
 use App\Photo;
 
 
+
 use Illuminate\Http\Request;
 
 use App\Http\Requests;
+use Illuminate\Support\Facades\Session;
 
 class AdminUsersController extends Controller
 {
@@ -23,7 +25,7 @@ class AdminUsersController extends Controller
      */
     public function index()
     {
-        $users = User::all();
+        $users = User::all()->sortBy('role');
 
         return view('admin/users/index', compact('users'));
     }
@@ -82,6 +84,9 @@ class AdminUsersController extends Controller
 
         # Mass assignment creation of a user using the input object
         User::create($input);
+
+        Session::flash('created_user', 'The user has been created successfully');
+
 
         # Redirect
         return redirect('/admin/users');
@@ -157,6 +162,8 @@ class AdminUsersController extends Controller
 
         $user->update($input);
 
+        Session::flash('updated_user', 'The user has been updated');
+
 
         return redirect('/admin/users');
 
@@ -173,6 +180,19 @@ class AdminUsersController extends Controller
      */
     public function destroy($id)
     {
-        //
+
+        # Find the user with $id
+        $user = User::findOrFail($id);
+
+        # Delete the user's photo
+        unlink(public_path() .  $user->photo->file);
+
+        # Delete the user
+        $user->delete();
+
+        # Create a 1 time session to tell the user a user has been deleted
+        Session::flash('deleted_user', 'The user has been deleted');
+
+        return redirect('/admin/users');
     }
 }

@@ -20,10 +20,34 @@ Route::get('/', function () {
 Route::auth();
 Route::get('/home', 'HomeController@index');
 
-Route::get('admin', function() {
 
-    return view('admin.index');
+
+
+Route::group(['middleware'=>'admin'], function () {
+
+    Route::get('admin', function() {
+
+        return view('admin.index');
+    });
+
+    Route::resource('admin/users', 'AdminUsersController');
+
+    Route::resource('admin/posts', 'AdminPostsController');
+
 });
 
-Route::resource('admin/users', 'AdminUsersController');
+
+
+# Test route
+Route::get('/test', function () {
+
+    $role = \App\Role::findOrFail(1);
+
+    foreach($role->users as $user) {
+        echo $user->name;
+    }
+
+});
+
+
 
