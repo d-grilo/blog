@@ -31,4 +31,10 @@ class Post extends Model
     }
 
 
+    # This post has many comments
+    public function comments() {
+        return $this->hasMany('App\Comment');
+    }
+
+
 }
