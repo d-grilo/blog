@@ -12,7 +12,8 @@ class CommentReply extends Model
         'author',
         'email',
         'body',
-        'is_active'
+        'is_active',
+        'photo'
     ];
 
     # This reply belongs to a comment

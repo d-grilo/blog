@@ -3,24 +3,21 @@
 
 @section('content')
 
-
-
     @if(count($comments) > 0)
 
         <h1>Comments</h1>
 
         <table class="table">
             <thead>
-                <tr>
-                    <th>ID</th>
-                    <th>Author</th>
-                    <th>Email</th>
-                    <th>Body</th>
-                    <th>Post</th>
-                    <th>Replies</th>
-                    <th>Status</th>
-                    <th>Delete</th>
-                </tr>
+            <tr>
+                <th>ID</th>
+                <th>Author</th>
+                <th>Email</th>
+                <th>Comment</th>
+                <th>Post</th>
+                <th>Status</th>
+                <th>Delete</th>
+            </tr>
             </thead>
             <tbody>
             @foreach($comments as $comment)
@@ -30,7 +27,6 @@
                     <td>{{$comment->email}}</td>
                     <td>{{$comment->body}}</td>
                     <td><a href="{{route('home.post', $comment->post->id)}}">View post</a></td>
-                    <td><a href="{{route('admin.comment.replies.show', $comment->id)}}">View replies</a></td>
 
                     <td>
                         @if($comment->is_active == 1)

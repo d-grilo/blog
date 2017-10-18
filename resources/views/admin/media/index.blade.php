@@ -32,7 +32,7 @@
                          <span style="color: red;">No</span>
                       @endif
                   </td>
-                  <td>{{$photo->created_at ? $photo->created_at : 'No date'}}</td>
+                  <td>{{$photo->created_at ? $photo->created_at->diffForHumans() : 'No date'}}</td>
 
                   <td>
                       {!! Form::model($photo, ['method'=>'DELETE', 'action'=>['AdminMediasController@destroy', $photo->id]]) !!}
