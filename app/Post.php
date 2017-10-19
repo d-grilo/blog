@@ -4,8 +4,22 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
-class Post extends Model
+use Cviebrock\EloquentSluggable\SluggableTrait;
+use Cviebrock\EloquentSluggable\SluggableInterface;
+
+
+class Post extends Model implements SluggableInterface
 {
+
+    use SluggableTrait;
+
+    protected $sluggable = [
+        'build_from'=> 'title',
+        'save_to'=>'slug',
+        'on_update'=>true
+    ];
+
+
     protected $fillable = [
         'title',
         'body',

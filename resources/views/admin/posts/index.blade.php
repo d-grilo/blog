@@ -9,7 +9,7 @@
         <p class="text-center bg-danger">{{session('deleted_post')}}</p>
     @elseif(Session::has('updated_post'))
         <p class="text-center bg-success">{{session('updated_post')}} <i class="fa fa-check" aria-hidden="true"></i></p>
-    @elseif(Session::has('deleted_post'))
+    @elseif(Session::has('created_post'))
         <p class="text-center bg-info">{{session('created_post')}} <i class="fa fa-thumbs-o-up" aria-hidden="true"></i></p>
     @endif
 
@@ -40,7 +40,7 @@
                 <td>{{$post->category ? $post->category->name : 'Uncategorized'}}</td>
                 <td><a href="{{route('admin.posts.edit', $post->id)}}">{{$post->title}}</a></td>
                 <td>{{str_limit($post->body, 13)}}</td>
-                <td><a href="{{route('home.post', $post->id)}}">View post</a></td>
+                <td><a href="{{route('home.post', $post->slug)}}">View post</a></td>
                 <td><a href="{{route('admin.comments.show', $post->id)}}">View comments</a></td>
                 <td>{{$post->created_at->diffForHumans()}}</td>
                 <td>{{$post->updated_at->diffForHumans()}}</td>
@@ -50,6 +50,11 @@
         </tbody>
      </table>
 
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-5">
+            {{$posts->render()}}
+        </div>
+    </div>
 
 @endsection
 

@@ -29,7 +29,6 @@ Route::get('/post/{id}', ['as'=>'home.post', 'uses'=>'AdminPostsController@post'
 Route::group(['middleware'=>'admin'], function () {
 
     Route::get('admin', function() {
-
         return view('admin.index');
     });
 
@@ -40,6 +39,7 @@ Route::group(['middleware'=>'admin'], function () {
     Route::resource('admin/categories', 'AdminCategoriesController');
 
     Route::resource('admin/media', 'AdminMediasController');
+    Route::delete('admin/delete/media', 'AdminMediasController@deleteMedia');
 
     Route::resource('admin/comments', 'PostCommentsController');
 
