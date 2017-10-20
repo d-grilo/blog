@@ -38,12 +38,14 @@ Route::group(['middleware'=>'admin'], function () {
 
     Route::resource('admin/categories', 'AdminCategoriesController');
 
+
     Route::resource('admin/media', 'AdminMediasController');
     Route::delete('admin/delete/media', 'AdminMediasController@deleteMedia');
 
-    Route::resource('admin/comments', 'PostCommentsController');
 
+    Route::resource('admin/comments', 'PostCommentsController');
     Route::resource('admin/comment/replies', 'CommentRepliesController');
+
 });
 
 Route::group(['middleware'=>'auth'], function () {
@@ -58,10 +60,10 @@ Route::group(['middleware'=>'auth'], function () {
 # Test route
 Route::get('/test', function () {
 
-    $role = \App\Role::findOrFail(1);
+    $categories = \App\Category::all();
 
-    foreach($role->users as $user) {
-        echo $user->name;
+    foreach($categories as $category) {
+        echo $category->name;
     }
 
 });

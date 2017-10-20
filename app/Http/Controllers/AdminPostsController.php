@@ -172,10 +172,13 @@ class AdminPostsController extends Controller
 
         $post = Post::findBySlugOrFail($slug);
 
+        $categories = Category::orderBy('created_at', 'desc')->take(4)->get();
+
+
         $comments = $post->comments()->whereIsActive(1)->get();
 
 
-        return view('post', compact('post', 'comments'));
+        return view('post', compact('post', 'comments', 'categories'));
     }
 
 }

@@ -79,6 +79,8 @@
 
         $(document).ready(function() {
 
+
+            // Checks all boxes
             $('#options').click(function () {
 
                 if(this.checked) {
@@ -94,6 +96,7 @@
             });
 
 
+            // Make sure at least one box is checked before submitting
             $("#box-form").submit(function(event){
 
                 if ($("#box-form input:checkbox:checked").length < 1)
